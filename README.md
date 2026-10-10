@@ -31,7 +31,7 @@ mamaearth-returns-growth-intelligence/
 └── README.md
 ```
 
-The SQLite database `mamaearth.db` is intentionally included with the submission. The SQL scripts are also provided to recreate the database from the supplied data.
+The SQLite database `mamaearth.db` is intentionally included as a **raw, uncleaned** submission artifact. The original files in `data/` must also remain unchanged. Part 1 SQL reports run against the raw database; Part 2 reads the original CSV files independently and performs cleaning in Python. Do not manually edit the CSVs or pre-clean the database: the raw SQL layer is expected to retain 180 orders, including duplicates O0176–O0180 and the original missing values.
 
 ## Features
 
@@ -39,7 +39,7 @@ The SQLite database `mamaearth.db` is intentionally included with the submission
 - **Data cleaning and EDA:** Python/Pandas processing, duplicate handling, missing-value treatment, and outlier investigation.
 - **Visualizations:** Monthly revenue trend after outlier correction and return rates by payment method.
 - **Gemini-assisted narrative generation:** Python builds the verified Situation–Complication–Resolution (SCR) report from `findings.json`; Gemini generates an additional business interpretation from the same findings.
-- **Offline fallback:** If `GEMINI_API_KEY` is missing or the Gemini request fails, the verified SCR report is still generated without an API call.
+- **Offline fallback:** If the terminal environment variable `GEMINI_API_KEY` is missing or the Gemini request fails, the verified SCR report is still generated without an API call.
 - **Validation:** Checks six required numeric findings and the presence of the Situation, Complication, and Resolution sections before saving the output. These checks validate the verified report; they do not independently prove the factual completeness of Gemini's interpretation.
 
 ## Dataset and Key Findings
@@ -82,7 +82,7 @@ Run commands from the repository root.
 
 ### 1. Database setup
 
-The submitted `mamaearth.db` is included for convenience. To recreate it, run the SQL scripts in this order.
+The submitted `mamaearth.db` is included for convenience and must remain raw. To recreate it from scratch, run the SQL scripts in this order. Run the SQL reports before the Python cleaning pipeline so the raw and cleaned results remain distinct.
 
 **Windows PowerShell:**
 
@@ -125,7 +125,7 @@ The generator supports Gemini online generation and an offline fallback.
 **Windows PowerShell — online Gemini mode:**
 
 ```powershell
-$env:GEMINI_API_KEY="YOUR_API_KEY"
+$env:GEMINI_API_KEY = "YOUR_API_KEY"
 python narrator/generate_narrative.py
 ```
 
@@ -168,6 +168,6 @@ Use corrected figures for trend analysis and the cleaned dataset for operational
 
 - The repository is intended to be public for capstone review.
 - `mamaearth.db` is intentionally included as a submission artifact.
-- Never commit a real Gemini API key, an `.env` file containing secrets, or credentials.
-- Keep the SQL scripts, input CSV files, Python source files, generated findings, narrative sample, database, and chart images in the repository.
+- Never commit a real Gemini API key, an `.env` file containing secrets, or credentials. Enter the key only in the terminal as the `GEMINI_API_KEY` environment variable; never hardcode it in Python or README files.
+- Keep the SQL scripts, unchanged raw input CSV files, Python source files, generated findings, narrative sample, raw database, and chart images in the repository.
 - Remove accidental placeholder files such as `sql/junk` or `visualizations/junk` before submission.
