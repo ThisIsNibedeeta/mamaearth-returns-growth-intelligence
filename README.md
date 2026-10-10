@@ -38,9 +38,9 @@ The SQLite database `mamaearth.db` is intentionally included with the submission
 - **SQL data model and reporting:** Schema creation, seed data, and analytical SQL reports.
 - **Data cleaning and EDA:** Python/Pandas processing, duplicate handling, missing-value treatment, and outlier investigation.
 - **Visualizations:** Monthly revenue trend after outlier correction and return rates by payment method.
-- **AI narrative generation:** Gemini-powered SCR summary using analytical findings.
-- **Offline fallback:** Generates a narrative without an API key when Gemini is not configured.
-- **Numeric validation:** Checks key values in the saved narrative against generated findings.
+- **Gemini-assisted narrative generation:** Python builds the verified Situation–Complication–Resolution (SCR) report from `findings.json`; Gemini generates an additional business interpretation from the same findings.
+- **Offline fallback:** If `GEMINI_API_KEY` is missing or the Gemini request fails, the verified SCR report is still generated without an API call.
+- **Validation:** Checks six required numeric findings and the presence of the Situation, Complication, and Resolution sections before saving the output. These checks validate the verified report; they do not independently prove the factual completeness of Gemini's interpretation.
 
 ## Dataset and Key Findings
 
@@ -152,7 +152,7 @@ unset GEMINI_API_KEY
 python narrator/generate_narrative.py
 ```
 
-The generated narrative is saved to `narrator/sample_output.txt`. To document the online Gemini path, run the generator with your API key configured and ensure the saved sample contains the actual successful Gemini response. Run the project's numeric checks against the saved output as required by the capstone instructions.
+The generated report is saved to `narrator/sample_output.txt`. In online mode, the saved report contains the verified SCR narrative plus Gemini's business interpretation. In offline mode, it contains the verified SCR narrative without a Gemini interpretation. To document the online Gemini path, run the generator with your API key configured and confirm that the console reports Gemini success and validation passes. The numeric checks validate the required figures and SCR headings; review Gemini's interpretation separately for completeness and unsupported claims.
 
 ## Expected Analytical Highlights
 
