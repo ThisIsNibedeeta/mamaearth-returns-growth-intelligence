@@ -9,3 +9,9 @@ The highest-risk segment is COD in Tier-2 cities, with a 54.5% return rate. The 
 Resolution
 
 Use the verified cleaned figures for operational and finance reporting, focus return investigation on COD in Tier-2 cities, and use the outlier-corrected series for trend decisions. The true peak month is 2026-03 with 20,318.90 INR in revenue.
+
+Gemini-generated business interpretation
+
+* Reconciled financial accounting reveals that baseline top-line performance was artificially distorted by duplicate transactions and data outliers, masking the timing of actual demand spikes and true revenue realization.
+* Cash-on-delivery orders originating from mid-tier urban markets create a critical financial drag by driving exceptionally high product return rates, threatening margin stability and tying up operational capital.
+* Restructure cash-on-delivery fulfillment in high-risk regional zones by introducing order confirmation protocols, partial advance payments, and targeted digital payment discounts to suppress return volume and protect unit economics.
